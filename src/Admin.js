@@ -10,6 +10,12 @@ const Admin = () => {
         setContent(text);
     };
 
+    const handleBackClick = () => {
+        setContent(''); // Clear content to go back to initial state
+    };
+
+
+
     const formattedTexts = {
         'Система повышения администрации': (
             <div>
@@ -118,6 +124,9 @@ const Admin = () => {
             <div className="content">
                 {content}
             </div>
+            {content && (
+                <button onClick={handleBackClick}>Назад</button>
+            )}
         </div>
     );
 };

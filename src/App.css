@@ -11,11 +11,14 @@
   font-size: 2em;
   margin-bottom: 20px;
 }
-
 .admin-section button {
   display: block;
   margin: 10px auto;
   padding: 10px 20px;
   font-size: 1em;
   cursor: pointer;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
 }

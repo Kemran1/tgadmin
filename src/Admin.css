@@ -1,17 +1,24 @@
-.admin-section {
-    text-align: center;
-    margin-top: 50px;
-}
-
-.admin-section h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
 .admin-section button {
     display: block;
     margin: 10px auto;
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 1em;
     cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-section button:hover {
+    background-color: #45a049;
+}
+
+.admin-section button:active {
+    background-color: #3e8e41;
+}
+
+.admin-section button:focus {
+    outline: none;
 }
