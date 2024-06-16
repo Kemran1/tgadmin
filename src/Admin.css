@@ -1,0 +1,28 @@
+.admin-section {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.buttons {
+    margin: 20px 0;
+}
+
+.buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.content {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    margin: 0 auto;
+}
