@@ -3,26 +3,15 @@
     margin-top: 50px;
 }
 
-.buttons {
-    margin: 20px 0;
+.admin-section h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
 }
 
-.buttons button {
-    margin: 5px;
+.admin-section button {
+    display: block;
+    margin: 10px auto;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 1em;
     cursor: pointer;
-}
-
-.content {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #333;
-    text-align: left;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    max-width: 600px;
-    margin: 0 auto;
 }

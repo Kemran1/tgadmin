@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Admin.css';
 
+
+
 const Admin = () => {
     const [content, setContent] = useState('');
 
@@ -100,9 +102,18 @@ const Admin = () => {
         <div className="admin-section">
             <h1>Админ раздел</h1>
             <div className="buttons">
-                <button onClick={() => handleButtonClick(formattedTexts['Система повышения администрации'])}>Система повышения администрации</button>
-                <button onClick={() => handleButtonClick(formattedTexts['Норма администрации'])}>Норма администрации</button>
-                <button onClick={() => handleButtonClick(formattedTexts['Обязанности администрации сервера'])}>Обязанности администрации сервера</button>
+                <button onClick={() => handleButtonClick(formattedTexts['Система повышения администрации'])}>Система
+                    повышения администрации
+                </button>
+                <button onClick={() => handleButtonClick(formattedTexts['Норма администрации'])}>Норма администрации
+                </button>
+                <button
+                    onClick={() => handleButtonClick(formattedTexts['Обязанности администрации сервера'])}>Обязанности
+                    администрации сервера
+                </button>
+                <button onClick={() => window.location.href = 'https://forum.blackrussia.online/'}>Официальный форум
+                    BLACK RUSSIA (Игрок)
+                </button>
             </div>
             <div className="content">
                 {content}
