@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import './Admin.css';
-import AdminTasks from './AdminTasks'; // Импорт компонента AdminTasks
+import AdminTasks from './AdminTasks';
 
 const Admin = () => {
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState(null);
 
-    const handleButtonClick = (text) => {
-        setContent(text);
+    const handleButtonClick = (component) => {
+        setContent(component);
     };
 
     const handleBackClick = () => {
-        setContent('');
+        setContent(null); // Clear content to go back to initial state
     };
 
     const formattedTexts = {
@@ -142,22 +142,25 @@ const Admin = () => {
     return (
         <div className="admin-section">
             <h1>Админ раздел</h1>
-            <div className="buttons">
-                <button onClick={() => handleButtonClick(formattedTexts['Система повышения администрации'])}>
-                    Система повышения администрации
-                </button>
-                <button onClick={() => handleButtonClick(formattedTexts['Норма администрации'])}>
-                    Норма администрации
-                </button>
-                <button onClick={() => handleButtonClick(formattedTexts['Обязанности администрации сервера'])}>
-                    Обязанности администрации сервера
-                </button>
-                <button onClick={() => window.location.href = 'https://forum.blackrussia.online/'}>
-                    Официальный форум BLACK RUSSIA (Игрок)
-                </button>
-                {/* Добавляем кнопку Admin PASS */}
-                <button onClick={() => handleButtonClick(<AdminTasks />)}>Admin PASS</button>
-            </div>
+            {!content && (
+                <div className="buttons">
+                    <button onClick={() => handleButtonClick(<div>Система повышения администрации</div>)}>
+                        Система повышения администрации
+                    </button>
+                    <button onClick={() => handleButtonClick(<div>Норма администрации</div>)}>
+                        Норма администрации
+                    </button>
+                    <button onClick={() => handleButtonClick(<div>Обязанности администрации сервера</div>)}>
+                        Обязанности администрации сервера
+                    </button>
+                    <button onClick={() => window.location.href = 'https://forum.blackrussia.online/'}>
+                        Официальный форум BLACK RUSSIA (Игрок)
+                    </button>
+                    <button onClick={() => handleButtonClick(<AdminTasks handleBackClick={handleBackClick} />)}>
+                        Admin PASS
+                    </button>
+                </div>
+            )}
             <div className="content">
                 {content}
             </div>

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AdminTasks.css';
 import { getNicknameByTelegramId } from './googleSheetsAPI';
 
-const AdminTasks = () => {
+const AdminTasks = ({ handleBackClick }) => {
     const [tasks, setTasks] = useState([]);
     const [points, setPoints] = useState(0);
     const [level, setLevel] = useState(1);
@@ -41,10 +41,18 @@ const AdminTasks = () => {
     };
 
     const handleAdminPassClick = async () => {
-        const telegramId = getTelegramId(); // Функция получения Telegram ID
-        const nickname = await getNicknameByTelegramId(telegramId);
-        setNickname(nickname || 'администратор');
+        try {
+            const telegramId = 'your_telegram_id'; // Replace with actual telegramId retrieval logic
+            const nickname = await getNicknameByTelegramId(telegramId);
+            setNickname(nickname || 'администратор');
+        } catch (error) {
+            console.error('Error fetching nickname:', error);
+        }
     };
+
+    useEffect(() => {
+        handleGetTasks();
+    }, []);
 
     return (
         <div className="admin-tasks-section">
@@ -66,6 +74,7 @@ const AdminTasks = () => {
                 <h2>Уровень: {level}</h2>
                 <p>Опыт: {points} / 1000</p>
             </div>
+            <button onClick={handleBackClick}>Назад</button>
         </div>
     );
 };
