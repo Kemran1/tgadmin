@@ -1,24 +1,37 @@
-.admin-section button {
-    display: block;
-    margin: 10px auto;
-    padding: 12px 24px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
+body {
+    background-color: var(--tg-theme-bg-color, #ffffff);
+    color: var(--tg-theme-text-color, #000000);
+}
+
+.admin-section {
+    padding: 20px;
+    background-color: var(--tg-theme-bg-color, #ffffff);
+    color: var(--tg-theme-text-color, #000000);
+}
+
+.buttons button {
+    background-color: var(--tg-theme-button-color, #0088cc);
+    color: var(--tg-theme-button-text-color, #ffffff);
     border: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-.admin-section button:hover {
-    background-color: #45a049;
+.buttons button:hover {
+    background-color: var(--tg-theme-button-hover-color, #0077bb);
 }
 
-.admin-section button:active {
-    background-color: #3e8e41;
+.content {
+    margin-top: 20px;
 }
 
-.admin-section button:focus {
-    outline: none;
+.formatted-text h2, .formatted-text h3, .formatted-text p, .formatted-text ul, .formatted-text li {
+    color: var(--tg-theme-text-color, #000000);
+}
+
+.notes ul {
+    padding-left: 20px;
+    list-style: disc;
 }
