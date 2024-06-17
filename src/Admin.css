@@ -27,6 +27,14 @@ body {
     margin-top: 20px;
 }
 
+.formatted-text {
+    text-align: left;
+}
+
+.centered {
+    text-align: center;
+}
+
 .formatted-text h2, .formatted-text h3, .formatted-text p, .formatted-text ul, .formatted-text li {
     color: var(--tg-theme-text-color, #000000);
 }
