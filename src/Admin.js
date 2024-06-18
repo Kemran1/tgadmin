@@ -144,20 +144,20 @@ const Admin = () => {
             <h1>Админ раздел</h1>
             {!content && (
                 <div className="buttons">
-                    <button onClick={() => handleButtonClick(<div>Система повышения администрации</div>)}>
-                        Система повышения администрации
+                    <button onClick={() => handleButtonClick(formattedTexts['Система повышения администрации'])}>Система
+                        повышения администрации
                     </button>
-                    <button onClick={() => handleButtonClick(<div>Норма администрации</div>)}>
-                        Норма администрации
+                    <button onClick={() => handleButtonClick(formattedTexts['Норма администрации'])}>Норма администрации
                     </button>
-                    <button onClick={() => handleButtonClick(<div>Обязанности администрации сервера</div>)}>
-                        Обязанности администрации сервера
+                    <button
+                        onClick={() => handleButtonClick(formattedTexts['Обязанности администрации сервера'])}>Обязанности
+                        администрации сервера
                     </button>
-                    <button onClick={() => window.location.href = 'https://forum.blackrussia.online/'}>
-                        Официальный форум BLACK RUSSIA (Игрок)
+                    <button onClick={() => window.location.href = 'https://forum.blackrussia.online/'}>Официальный форум
+                        BLACK RUSSIA (Игрок)
                     </button>
-                    <button onClick={() => handleButtonClick(<AdminTasks handleBackClick={handleBackClick} />)}>
-                        Admin PASS
+                    <button onClick={() => handleButtonClick(<AdminTasks handleBackClick={handleBackClick}/>)}>
+                    Admin PASS
                     </button>
                 </div>
             )}

@@ -1,9 +1,7 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
-// Добавьте свои данные аутентификации
-const doc = new GoogleSpreadsheet('1KTQhM5MMkhhCBLD49QYL24nyOpBeyEgIwVjfRvhZNiY');
-
-const googleCredentials = {
+const SPREADSHEET_ID = '1KTQhM5MMkhhCBLD49QYL24nyOpBeyEgIwVjfRvhZNiY';
+const CREDENTIALS = {
     type: "service_account",
     project_id: "bot-tabl",
     private_key_id: "d8bb858d23169164ab57c301561c646ef313683d",
@@ -16,20 +14,29 @@ const googleCredentials = {
     client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/bottg-487%40bot-tabl.iam.gserviceaccount.com",
 };
 
-async function getNicknameByTelegramId(telegramId) {
+export const checkAccess = async (userId) => {
     try {
-        await doc.useServiceAccountAuth(googleCredentials);
+        const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
+        await doc.useServiceAccountAuth(CREDENTIALS);
         await doc.loadInfo();
-
         const sheet = doc.sheetsByIndex[0];
         const rows = await sheet.getRows();
+        const headerRow = rows[0];
+        const telegramIndex = headerRow._rawData.findIndex(cell => cell === 'Телеграм');
 
-        const row = rows.find(r => r.telegramId === telegramId);
-        return row ? row['Ваш Nick'] : null;
+        if (telegramIndex === -1) {
+            return false;
+        }
+
+        for (let row of rows) {
+            if (row._rawData[telegramIndex] === userId.toString()) {
+                return true;
+            }
+        }
+
+        return false;
     } catch (error) {
-        console.error('Error fetching data from Google Sheets:', error);
-        return null;
+        console.error('Error checking access:', error);
+        return false;
     }
-}
-
-export { getNicknameByTelegramId };
+};
