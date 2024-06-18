@@ -7,6 +7,7 @@ const AdminTasks = ({ handleBackClick }) => {
     const [points, setPoints] = useState(0);
     const [level, setLevel] = useState(1);
     const [nickname, setNickname] = useState('');
+    const [message, setMessage] = useState('');
 
     const taskList = [
         { id: 1, description: "Сделать 1000 действий за день", reward: 200 },
@@ -40,14 +41,8 @@ const AdminTasks = ({ handleBackClick }) => {
         setTasks(prevTasks => prevTasks.filter(t => t.id !== taskId));
     };
 
-    const handleAdminPassClick = async () => {
-        try {
-            const telegramId = 'your_telegram_id'; // Replace with actual telegramId retrieval logic
-            const nickname = await getNicknameByTelegramId(telegramId);
-            setNickname(nickname || 'администратор');
-        } catch (error) {
-            console.error('Error fetching nickname:', error);
-        }
+    const handleAdminPassClick = () => {
+        setMessage('В разработке');
     };
 
     useEffect(() => {
@@ -60,6 +55,7 @@ const AdminTasks = ({ handleBackClick }) => {
             <div className="admin-pass">
                 <button onClick={handleAdminPassClick}>Admin PASS</button>
             </div>
+            {message && <p>{message}</p>}
             {nickname && <p>Здравствуйте, {nickname}!</p>}
             <div className="tasks">
                 {tasks.map(task => (
