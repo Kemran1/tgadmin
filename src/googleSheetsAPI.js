@@ -1,7 +1,6 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet';
+const doc = new GoogleSpreadsheet('1KTQhM5MMkhhCBLD49QYL24nyOpBeyEgIwVjfRvhZNiY');
 
-const SPREADSHEET_ID = '1KTQhM5MMkhhCBLD49QYL24nyOpBeyEgIwVjfRvhZNiY';
-const CREDENTIALS = {
+const googleCredentials = {
     type: "service_account",
     project_id: "bot-tabl",
     private_key_id: "d8bb858d23169164ab57c301561c646ef313683d",
@@ -14,29 +13,25 @@ const CREDENTIALS = {
     client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/bottg-487%40bot-tabl.iam.gserviceaccount.com",
 };
 
-export const checkAccess = async (userId) => {
+
+async function checkAccess(userId) {
     try {
-        const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
-        await doc.useServiceAccountAuth(CREDENTIALS);
+        await doc.useServiceAccountAuth(googleCredentials);
         await doc.loadInfo();
         const sheet = doc.sheetsByIndex[0];
         const rows = await sheet.getRows();
-        const headerRow = rows[0];
-        const telegramIndex = headerRow._rawData.findIndex(cell => cell === 'Телеграм');
 
-        if (telegramIndex === -1) {
-            return false;
-        }
-
+        const userIdStr = String(userId);
         for (let row of rows) {
-            if (row._rawData[telegramIndex] === userId.toString()) {
+            if (row.Telegram === userIdStr) {
                 return true;
             }
         }
-
         return false;
     } catch (error) {
         console.error('Error checking access:', error);
         return false;
     }
-};
+}
+
+export { checkAccess };
