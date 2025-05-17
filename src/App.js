@@ -1,29 +1,34 @@
-import React, { useState } from 'react';
-import { initTelegramWebApp, isAdmin } from './telegram-webapp';
+import React, { useState, useEffect } from 'react';
+import { initTelegram } from './telegram';
+import { checkAdminRights } from './googleSheets';
 import AdminTasks from './AdminTasks';
-import Unauthorized from './components/Unauthorized';
 import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [adminData, setAdminData] = useState(null);
 
-  React.useEffect(() => {
-    const tg = initTelegramWebApp();
+  useEffect(() => {
+    const tg = initTelegram();
     if (tg.initDataUnsafe.user) {
-      setUser(tg.initDataUnsafe.user);
+      const tgUser = tg.initDataUnsafe.user;
+      setUser(tgUser);
+      
+      checkAdminRights(tgUser.id).then(data => {
+        if (data) setAdminData({ level: data[1], name: data[2] });
+      });
     }
   }, []);
 
   return (
     <div className="App">
-      {user ? (
-        isAdmin(user.id) ? (
-          <AdminTasks />
-        ) : (
-          <Unauthorized />
-        )
+      {adminData ? (
+        <AdminTasks user={user} adminLevel={adminData.level} />
       ) : (
-        <div>Загрузка...</div>
+        <div className="access-denied">
+          <h1>Доступ запрещён</h1>
+          <p>Ваш ID: {user?.id || 'не определён'}</p>
+        </div>
       )}
     </div>
   );
