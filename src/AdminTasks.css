@@ -1,20 +1,33 @@
-.admin-tasks-section {
+.admin-tasks {
   padding: 20px;
-  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.tasks-list {
-  margin-top: 20px;
-}
-
-.task {
-  background: #f5f5f5;
+.question {
+  margin-bottom: 20px;
   padding: 15px;
-  margin-bottom: 10px;
+  background: #f5f5f5;
   border-radius: 8px;
 }
 
-.unauthorized {
+label {
+  display: block;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #0088cc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.access-denied {
   text-align: center;
   margin-top: 50px;
   color: #ff0000;
