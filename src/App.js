@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import TelegramAuth from './components/TelegramAuth';
+import AdminPanel from './components/AdminPanel';
 import './App.css';
-import Admin from './Admin';
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
     <div className="App">
-      <Admin />
+      {!user ? (
+        <TelegramAuth onAuth={setUser} />
+      ) : (
+        <AdminPanel user={user} />
+      )}
     </div>
   );
 }
