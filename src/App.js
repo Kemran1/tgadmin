@@ -6,7 +6,7 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
-  const [accessData, setAccessData] = useState({ hasAccess: false, level: '1' });
+  const [access, setAccess] = useState({ loading: true, hasAccess: false });
 
   useEffect(() => {
     const tg = initTelegram();
@@ -14,20 +14,18 @@ function App() {
       const tgUser = tg.initDataUnsafe.user;
       setUser(tgUser);
       
-      checkAdminAccess(tgUser.id).then(data => {
-        setAccessData(data);
+      checkAdminAccess(tgUser.id).then(result => {
+        setAccess({ ...result, loading: false });
       });
     }
   }, []);
 
+  if (access.loading) return <div>Проверка доступа...</div>;
+  
   return (
-    <div className="App">
-      {accessData.hasAccess ? (
-        <AdminTasks 
-          user={user} 
-          adminLevel={accessData.level} 
-          adminName={accessData.name}
-        />
+    <div className="app">
+      {access.hasAccess ? (
+        <AdminTasks user={user} adminLevel={access.level} />
       ) : (
         <div className="access-denied">
           <h1>Доступ запрещён</h1>
