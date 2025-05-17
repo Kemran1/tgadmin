@@ -1,11 +1,11 @@
 const tg = window.Telegram.WebApp;
 
 export const initTelegramWebApp = () => {
-    tg.expand(); // Развернуть приложение на весь экран
-    tg.enableClosingConfirmation(); // Подтверждение перед закрытием
-    return tg;
+  tg.expand();
+  return tg;
 };
 
-export const sendDataToBot = (data) => {
-    tg.sendData(JSON.stringify(data));
+export const isAdmin = (userId) => {
+  const ADMIN_IDS = [123456789, 987654321]; // Ваши ID админов
+  return ADMIN_IDS.includes(userId);
 };
