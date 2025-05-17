@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
-import TelegramAuth from './components/TelegramAuth';
-import AdminPanel from './components/AdminPanel';
+import { initTelegramWebApp, isAdmin } from './telegram-webapp';
+import AdminTasks from './AdminTasks';
+import Unauthorized from './components/Unauthorized';
 import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
 
+  React.useEffect(() => {
+    const tg = initTelegramWebApp();
+    if (tg.initDataUnsafe.user) {
+      setUser(tg.initDataUnsafe.user);
+    }
+  }, []);
+
   return (
     <div className="App">
-      {!user ? (
-        <TelegramAuth onAuth={setUser} />
+      {user ? (
+        isAdmin(user.id) ? (
+          <AdminTasks />
+        ) : (
+          <Unauthorized />
+        )
       ) : (
-        <AdminPanel user={user} />
+        <div>Загрузка...</div>
       )}
     </div>
   );
