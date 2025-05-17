@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { initTelegram } from './telegram';
-import { checkAdminRights } from './googleSheets';
+import { checkAdminAccess } from './googleSheets';
 import AdminTasks from './AdminTasks';
 import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
-  const [adminData, setAdminData] = useState(null);
+  const [accessData, setAccessData] = useState({ hasAccess: false, level: '1' });
 
   useEffect(() => {
     const tg = initTelegram();
@@ -14,20 +14,24 @@ function App() {
       const tgUser = tg.initDataUnsafe.user;
       setUser(tgUser);
       
-      checkAdminRights(tgUser.id).then(data => {
-        if (data) setAdminData({ level: data[1], name: data[2] });
+      checkAdminAccess(tgUser.id).then(data => {
+        setAccessData(data);
       });
     }
   }, []);
 
   return (
     <div className="App">
-      {adminData ? (
-        <AdminTasks user={user} adminLevel={adminData.level} />
+      {accessData.hasAccess ? (
+        <AdminTasks 
+          user={user} 
+          adminLevel={accessData.level} 
+          adminName={accessData.name}
+        />
       ) : (
         <div className="access-denied">
           <h1>Доступ запрещён</h1>
-          <p>Ваш ID: {user?.id || 'не определён'}</p>
+          <p>ID {user?.id} не найден в списке администраторов.</p>
         </div>
       )}
     </div>
